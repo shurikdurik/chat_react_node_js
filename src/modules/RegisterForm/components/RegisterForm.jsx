@@ -59,7 +59,7 @@ const RegisterForm = (props) => {
             <Form.Item name="re-password">
               <Input
                 prefix={<LockOutlined className="site-form-item-icon" />}
-                type="re-password"
+                type="rePassword"
                 placeholder="Repeat your password"
                 size="large"
               />
