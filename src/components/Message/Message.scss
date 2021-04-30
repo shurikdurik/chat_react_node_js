@@ -18,7 +18,7 @@
       width: 33px;
       height: 33px;
       margin-right: 13px;
-      margin-bottom: 23px;
+      margin-bottom: 5px;
     }
   }
 
@@ -99,5 +99,51 @@
         color: $black;
       }
     }
+  }
+  &--is-typing {
+    #{$self}__bubble {
+      background-color: #e5edff;
+      box-shadow: 0px 5px 5px rgba(54, 116, 255, 0.04);
+      padding: 15px 18px;
+    }
+  }
+
+  &--image {
+    #{$self}__attachments {
+      img {
+        width: 150px;
+        height: 150px;
+      }
+    }
+  }
+  &__typing {
+    span {
+      height: 8px;
+      width: 8px;
+      border-radius: 50%;
+      background: #a6bdf0;
+      display: inline-block;
+      margin-right: 8px;
+      animation-name: typingAnimation;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+      animation-duration: 0.5s;
+
+      &:nth-of-type(2) {
+        animation-duration: 0.6s;
+      }
+      &:nth-of-type(3) {
+        animation-duration: 0.7s;
+      }
+    }
+  }
+}
+
+@keyframes typingAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

@@ -1,33 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import classnames from 'classnames';
-import readed from 'assets/img/readed.svg';
-import noreaded from 'assets/img/noreaded.svg';
+
+import { Time, IconReaded } from '../';
 
 import './Message.scss';
 
-const Message = ({ avatar, text, user, date, isMe, isReaded, attachments }) => {
+const Message = ({ avatar, text, user, date, isMe, isReaded, attachments, isTyping }) => {
   return (
-    <div className={classnames('message', { 'message--isme': isMe })}>
+    <div
+      className={classnames('message', {
+        'message--isme': isMe,
+        'message--is-typing': isTyping,
+        'message--image': attachments && attachments.length === 1,
+      })}>
       <div className="message__content">
-        {isMe && isReaded ? (
-          <img className="message__icon-readed" src={readed} alt="readed icon" />
-        ) : (
-          <img
-            className="message__icon-readed message__icon-readed--no"
-            src={noreaded}
-            alt="noreaded icon"
-          />
-        )}
+        <IconReaded isReaded={isReaded} isMe={isMe} />
         <div className="message__avatar">
           <img src={avatar} alt={`Avatar ${user.fullname}`} />
         </div>
         <div className="message__info">
           <div>
-            <div className="message__bubble">
-              <p className="message__text">{text}</p>
-            </div>
+            {(isTyping || text) && (
+              <div className="message__bubble">
+                {text && <p className="message__text">{text}</p>}
+                {isTyping && (
+                  <div className="message__typing">
+                    <span />
+                    <span />
+                    <span />
+                  </div>
+                )}
+              </div>
+            )}
             <div className="message__attachments">
               {attachments &&
                 attachments.map((item) => (
@@ -36,7 +41,11 @@ const Message = ({ avatar, text, user, date, isMe, isReaded, attachments }) => {
                   </div>
                 ))}
             </div>
-            <span className="message__date">{formatDistanceToNow(date, { addSuffix: true })}</span>
+            {date && (
+              <span className="message__date">
+                <Time date={date} />
+              </span>
+            )}
           </div>
         </div>
       </div>
@@ -53,6 +62,7 @@ Message.propTypes = {
   user: PropTypes.object,
   date: PropTypes.string,
   attachments: PropTypes.array,
+  isTyping: PropTypes.bool,
 };
 
 export default Message;
