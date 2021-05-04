@@ -1,8 +1,17 @@
 import React from 'react';
 import classNames from 'classnames';
-import { Time, IconReaded } from '../';
+import { IconReaded } from '../';
+import format from 'date-fns/format';
+import isToday from 'date-fns/isToday';
 
 import './DialogItem.scss';
+
+const getMessageTime = (created_at) => {
+  if (isToday(created_at)) {
+    return format(created_at, 'HH:mm');
+  }
+  return format(created_at, 'dd.MM.yyyy');
+};
 
 const getAvatar = (avatar) => {
   if (avatar) {
@@ -12,27 +21,19 @@ const getAvatar = (avatar) => {
   }
 };
 
-const DialogItem = ({ user, message, unreaded }) => {
+const DialogItem = ({ user, message, unreaded, isMe }) => {
   return (
     <div className="dialogs">
       <div className={classNames('dialogs__item', { 'dialogs__item--online': user.isOnline })}>
-        <div className="dialogs__item-avatar">
-          {getAvatar('https://avatarfiles.alphacoders.com/186/186939.jpg')}
-        </div>
+        <div className="dialogs__item-avatar">{getAvatar(user.avatar)}</div>
         <div className="dialogs__item-info">
           <div className="dialogs__item-info-top">
             <b>{user.fullName}</b>
-            <span>
-              13:30
-              {/* <Time date={new Date()} /> */}
-            </span>
+            <span>{getMessageTime(message.created_at)}</span>
           </div>
           <div className="dialogs__item-info-buttom">
-            <p>
-              If you gonna be reach you have to be a bitch. I said bitch... Reach...If you gonna be
-              reach you have to be a bitch. I said bitch... Reach...
-            </p>
-            <IconReaded isMe={true} isReaded={true} />
+            <p>{message.text}</p>
+            {isMe && <IconReaded isMe={true} isReaded={true} />}
             {unreaded > 0 && (
               <div className="dialogs__item-info-buttom-count">
                 {unreaded > 9 ? '+9' : unreaded}
