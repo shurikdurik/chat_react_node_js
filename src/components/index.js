@@ -6,3 +6,4 @@ export { default as Time } from './Time';
 export { default as IconReaded } from './IconReaded';
 export { default as Dialogs } from './Dialogs';
 export { default as MessageAudio } from './MessageAudio';
+export { default as Avatar } from './Avatar';
