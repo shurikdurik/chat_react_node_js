@@ -1,4 +1,17 @@
 .dialogs {
+  &__search {
+    padding: 2px 20px 20px 20px;
+    input {
+      background-color: #f7f8f9;
+      border: 0;
+      height: 38px;
+    }
+    button {
+      border: 0;
+      height: 38px;
+    }
+  }
+
   &__item {
     display: flex;
     $item: &;

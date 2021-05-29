@@ -12,10 +12,29 @@
     &-header {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       padding: 21px;
       height: 58px;
       margin-bottom: 20px;
       border-bottom: 1px solid #f7f7f7;
+
+      .ant-btn-circle {
+        border: 0;
+        box-shadow: none;
+        color: #202020 !important;
+        margin-top: 4px;
+
+        &:after {
+          display: none;
+        }
+        svg {
+          opacity: 0.5;
+          &:hover {
+            cursor: pointer;
+            opacity: 1;
+          }
+        }
+      }
 
       & > div {
         span {
@@ -24,19 +43,10 @@
         }
       }
     }
-    &-search {
-      padding: 0 20px 20px 20px;
-      input {
-        background-color: #f7f8f9;
-        border: 0;
-        height: 38px;
-      }
-      button {
-        border: 0;
-        height: 38px;
-      }
-    }
+
     &-dialogs {
+      height: calc(100% - 90px);
+      overflow: auto;
       .dialogs {
         &__item {
           padding: 10px 20px;
@@ -53,6 +63,14 @@
 
   &__dialog {
     flex: 1;
+    position: relative;
+
+    .ant-empty {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
 
     &-header {
       padding: 12px;
@@ -69,6 +87,23 @@
         font-weight: bold;
         display: block;
         margin-bottom: 5px;
+      }
+      .ant-btn-circle {
+        border: 0;
+        box-shadow: none;
+        color: #202020 !important;
+        margin-top: 4px;
+
+        &:after {
+          display: none;
+        }
+        svg {
+          opacity: 0.5;
+          &:hover {
+            cursor: pointer;
+            opacity: 1;
+          }
+        }
       }
     }
     &-messages {
